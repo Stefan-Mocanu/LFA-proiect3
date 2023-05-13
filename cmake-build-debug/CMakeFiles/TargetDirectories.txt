@@ -1,0 +1,3 @@
+D:/Faculatate/Coduri/LFA/LFA-proiect3/cmake-build-debug/CMakeFiles/LFA_proiect3.dir
+D:/Faculatate/Coduri/LFA/LFA-proiect3/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Faculatate/Coduri/LFA/LFA-proiect3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
