@@ -1,6 +1,6 @@
 def separare(x):
     global neterm
-    if len(x)==1 and x == 'λ':
+    if len(x) == 1 and x == 'λ':
         return tuple('λ'), 0
     cnt = 0
     curent = ""
@@ -19,6 +19,15 @@ def separare(x):
     if curent:
         l.append(curent)
     return tuple(l), cnt
+
+
+def potential(x):
+    cnt = 0
+    for elem in x[0]:
+        if elem in neterm:
+            lista = [x[1] for x in prods[elem]]
+            cnt += min(lista)
+    return cnt + x[1]
 
 
 def genereaza(cuvinte,n):
@@ -46,7 +55,7 @@ def genereaza(cuvinte,n):
                         b = "".join(elem1[0][ii+1:])
                         c = "".join(prod[0])
                         adaug = separare("".join((a, c, b)))
-                        if adaug not in cuvs:
+                        if adaug not in cuvs and potential(adaug)<=n:
                             cuvs.append(adaug)
         if ok and len(elem1[0][0]) == n:
             cuvs.append(elem1)
@@ -67,12 +76,15 @@ while aux:
         if 'lb' in el[0]:
             prods[aux[0]][i] = (('λ',), 0)
     aux = f.readline().split()
-
+#print(prods)
 n = int(input("Ce lungime să aibă cuvintele generate: "))
 
 cuvinte = [(tuple(start), 0)]
 
 cuvinte = genereaza(cuvinte, n)
-print(f"S-au generat {len(cuvinte)} cuvinte!")
-for elem in cuvinte:
-    print(elem[0][0])
+if cuvinte:
+    print(f"S-au generat {len(cuvinte)} cuvinte!")
+    for elem in cuvinte:
+        print(elem[0][0])
+else:
+    print(f"Nu exista cuvinte de lungime {n} in gramatica definita!")
